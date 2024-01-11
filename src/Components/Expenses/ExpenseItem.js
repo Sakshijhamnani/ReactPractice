@@ -1,9 +1,13 @@
 import ExpenseDate from './ExpenseDate';
 import Card from '../UI/Card';
 import './ExpenseItem.css';
+import { useState } from 'react';
 
 const ExpenseItem=(props)=> {
-  const clickHandler=(id)=>{
+
+  const [title,setTitle]=useState(props.title)
+
+  const DeleteHandler=(id)=>{
     const updatedExpenses= props.items.filter((ele)=>{
     return id!==ele.id
    })
@@ -11,15 +15,20 @@ const ExpenseItem=(props)=> {
    props.setExpenses(updatedExpenses)
     
   }
+
+  const clickHandler=()=>{
+    setTitle('Updated!')
+  }
  
   return (
     <Card className='expense-item'>
       <ExpenseDate date={props.date} />
       <div className='expense-item__description'>
-        <h2>{props.title}</h2>
+        <h2>{title}</h2>
         <div className='expense-item__price'>${props.amount}</div>
       </div>
-      <button onClick={()=>clickHandler(props.id)}>Delete</button>
+      <button onClick={clickHandler}>Change Title</button>
+      <button onClick={()=>DeleteHandler(props.id)}>Delete</button>
     </Card>
   );
 }
