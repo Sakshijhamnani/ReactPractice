@@ -2,9 +2,10 @@ import logo from './logo.svg';
 import './App.css';
 import ExpenseItem from './Components/Expenses/ExpenseItem';
 import Expenses from './Components/Expenses/Expenses';
+import { useState } from 'react';
 
 const App=()=> {
-  const expenses = [
+  const [expenses,setExpenses]=useState( [
     {
       id: 'e1',
       title: 'Toilet Paper',
@@ -31,13 +32,14 @@ const App=()=> {
       date: new Date(2021, 5, 12),
       locationOfExpenditure:'Delhi'
     },
-  ];
+  ])
+  
   return (
    <div>
      <h2>Let's get started!</h2>
    
 
-    <Expenses items={expenses}/>
+    <Expenses items={expenses} setExpenses={setExpenses}/>
     
    </div>
   );
